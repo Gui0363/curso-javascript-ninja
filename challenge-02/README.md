@@ -13,7 +13,7 @@ Nesse exercício, você está livre para escolher os nomes para suas variáveis 
 ?
 
 // Declare uma nova variável, sem valor.
-?
+var algo;
 
 /*
 Crie uma função que adicione um valor à variável criada acima, e retorne a string:
