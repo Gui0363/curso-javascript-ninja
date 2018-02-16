@@ -1,4 +1,5 @@
-/*
+(function(doc, win) {
+  /*
 Vamos desenvolver mais um projeto. A ideia é fazer uma mini-calculadora.
 As regras são:
 
@@ -23,3 +24,26 @@ multiplicação (x), então no input deve aparecer "1+2x".
 input;
 - Ao pressionar o botão "CE", o input deve ficar zerado.
 */
+
+  var $tela = doc.querySelector("[data-js='tela']");
+  var $btnsNumber = doc.querySelectorAll("[data-js='btnN']");
+  var $btnCE = doc.querySelector("[data-js='btnCE']");
+
+  $btnsNumber.forEach(function(item) {
+    item.addEventListener(
+      "click",
+      function() {
+        $tela.value = $tela.value + item.value;
+      },
+      false
+    );
+  });
+
+  $btnCE.addEventListener(
+    "click",
+    function() {
+      $tela.value = "";
+    },
+    false
+  );
+})(document, window);
