@@ -1,4 +1,5 @@
 (function(doc, win) {
+  "use strict";
   /*
 Vamos desenvolver mais um projeto. A ideia é fazer uma mini-calculadora.
 As regras são:
@@ -28,6 +29,19 @@ input;
   var $tela = doc.querySelector("[data-js='tela']");
   var $btnsNumber = doc.querySelectorAll("[data-js='btnN']");
   var $btnCE = doc.querySelector("[data-js='btnCE']");
+  var $btnResult = doc.querySelector("[data-js='btnResult']");
+  var $btnsO = doc.querySelectorAll("[data-js='btnO']");
+
+  $btnsO.forEach(function(item) {
+    item.addEventListener(
+      "click",
+      function() {
+        $tela.value = removerUltimoItemSeForOperador($tela.value);
+        $tela.value = $tela.value + item.value;
+      },
+      false
+    );
+  });
 
   $btnsNumber.forEach(function(item) {
     item.addEventListener(
@@ -46,4 +60,44 @@ input;
     },
     false
   );
+
+  $btnResult.addEventListener(
+    "click",
+    function() {
+      $tela.value = removerUltimoItemSeForOperador($tela.value);
+      var allValues = $tela.value.match(/\d+[+-x÷/]?/g);
+      $tela.value = allValues.reduce(function(acumulado, atual) {
+        var firstValue = acumulado.slice(0, -1);
+        var operator = acumulado.split("").pop();
+        var lastValue = removerUltimoItemSeForOperador(atual);
+        var lastOperator = ultimoItemOperador(atual) ? atual.split("").pop() : false;
+        switch (operator) {
+          case "+":
+            return Number(firstValue) + Number(lastValue) + lastOperator;
+          case "-":
+            return Number(firstValue) - Number(lastValue) + lastOperator;
+          case "÷":
+            return Number(firstValue) / Number(lastValue) + lastOperator;
+          case "x":
+            return Number(firstValue) * Number(lastValue) + lastOperator;
+        }
+      });
+    },
+    false
+  );
+
+  function ultimoItemOperador(number) {
+    var operadores = ["+", "-", "*", "/"];
+    var lastItem = number.split("").pop();
+    return operadores.some(function(operador) {
+      return operador === lastItem;
+    });
+  }
+
+  function removerUltimoItemSeForOperador(number) {
+    if (ultimoItemOperador(number)) {
+      return number.slice(0, -1);
+    }
+    return number;
+  }
 })(document, window);
