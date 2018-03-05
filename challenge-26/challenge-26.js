@@ -1,6 +1,5 @@
-(function (doc, win) {
-
-  'use sctrict';
+(function(doc, win) {
+  "use sctrict";
 
   /*
   O desafio dessa semana é criar uma mini library (biblioteca) para
@@ -25,13 +24,32 @@
   */
   // ?
 
+  function DOM(elements) {
+    this.classe = document.querySelectorAll(elements);
+
+    this.on = function(acao, funcao) {
+      Array.prototype.forEach.call(this.classe, function(classe) {
+        classe.addEventListener(acao, funcao, false);
+      });
+    };
+
+    this.off = function(acao, funcao) {
+      Array.prototype.forEach.call(this.classe, function(classe) {
+        classe.removeEventListener(acao, funcao, false);
+      });
+    };
+
+    this.get = function() {
+      return this.classe;
+    };
+  }
+
   var $a = new DOM('[data-js="link"]');
-  $a.on('click', function (e) {
+  $a.on("click", function(e) {
     e.preventDefault();
-    console.log('clicou');
+    console.log("clicou");
   });
 
-  console.log('Elementos selecionados:', $a.get());
-  console.log('$a é filho de body?', $a.get()[0].parentNode === document.body);
-
+  console.log("Elementos selecionados:", $a.get());
+  console.log("$a é filho de body?", $a.get()[0].parentNode === document.body);
 })(Document, Window);
