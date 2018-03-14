@@ -1,3 +1,5 @@
+(function(win, doc) {
+  "use strict";
   /*
   No HTML:
   - Crie um formulário com um input de texto que receberá um CEP e um botão
@@ -25,3 +27,50 @@
   - Utilize a lib DOM criada anteriormente para facilitar a manipulação e
   adicionar as informações em tela.
   */
+
+  var ajax = new XMLHttpRequest();
+
+  var $input = doc.querySelector('[data-js="cepVai"]');
+  var $botao = doc.querySelector('[data-js="submit"]');
+  var $jsonCep = [];
+
+  var $cep = doc.querySelector('[data-js="cep"]');
+  var $logradouro = doc.querySelector('[data-js="logradouro"]');
+  var $complemento = doc.querySelector('[data-js="complemento"]');
+  var $bairro = doc.querySelector('[data-js="bairro"]');
+  var $cidade = doc.querySelector('[data-js="cidade"]');
+  var $uf = doc.querySelector('[data-js="uf"]');
+  var $unidade = doc.querySelector('[data-js="unidade"]');
+  var $ibge = doc.querySelector('[data-js="ibge"]');
+  var $gia = doc.querySelector('[data-js="gia"]');
+
+  $botao.addEventListener(
+    "click",
+    function(event) {
+      event.preventDefault();
+      var $result = [];
+
+      try {
+        ajax.open("GET", "https://viacep.com.br/ws/" + $input.value + "/json/");
+        ajax.send();
+      } catch (error) {
+        console.log(error);
+      }
+
+      ajax.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          $cep.textContent = JSON.parse(this.responseText).cep;
+          $logradouro.textContent = JSON.parse(this.responseText).logradouro;
+          $complemento.textContent = JSON.parse(this.responseText).complemento;
+          $bairro.textContent = JSON.parse(this.responseText).bairro;
+          $cidade.textContent = JSON.parse(this.responseText).cidade;
+          $uf.textContent = JSON.parse(this.responseText).uf;
+          $unidade.textContent = JSON.parse(this.responseText).unidade;
+          $ibge.textContent = JSON.parse(this.responseText).ibge;
+          $gia.textContent = JSON.parse(this.responseText).gia;
+        }
+      };
+    },
+    false
+  );
+})(window, document);

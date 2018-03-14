@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Challenge-28</title>
+</head>
+
+<body>
+  <input data-js="cepVai" placeholder="Digite seu CEP aqui" onkeydown="return CheckValue(event)" maxlength="8">
+  <button type="submit" data-js="submit">Procurar</button>
+  <p data-js="result"></p>
+  <table border="1">
+    <tr>
+      <th>CEP : </th>
+      <td data-js="cep"></td>
+    </tr>
+    <tr>
+      <th>Logradouro : </th>
+      <td data-js="logradouro"></td>
+    </tr>
+    <tr>
+      <th>Complemento : </th>
+      <td data-js="complemento"></td>
+    </tr>
+    <tr>
+      <th>Bairro : </th>
+      <td data-js="bairro"></td>
+    </tr>
+    <tr>
+      <th>Cidade : </th>
+      <td data-js="cidade"></td>
+    </tr>
+    <tr>
+      <th>UF : </th>
+      <td data-js="uf"></td>
+    </tr>
+    <tr>
+      <th>Unidade : </th>
+      <td data-js="unidade"></td>
+    </tr>
+    <tr>
+      <th>IBGE : </th>
+      <td data-js="ibge"></td>
+    </tr>
+    <tr>
+      <th>GIA : </th>
+      <td data-js="gia"></td>
+    </tr>
+  </table>
+
+  <script type="text/javascript">
+    function CheckValue(e) {
+      e = (window.event) ? event : e;
+
+      return (/[0-9\b]/.test(String.fromCharCode(e.keyCode)));
+    }
+
+  </script>
+  <script src="challenge-28.js"></script>
+</body>
+
+</html>
