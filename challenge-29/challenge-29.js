@@ -1,5 +1,5 @@
-(function() {
-  'use strict';
+(function (win, doc) {
+  "use strict";
 
   /*
   Vamos estruturar um pequeno app utilizando módulos.
@@ -36,4 +36,47 @@
   que será nomeado de "app".
   */
 
-})();
+  var $imagem = doc.querySelector("[data-js='imagemNC']");
+  var $marcaModelo = doc.querySelector("[data-js='marcaModeloNC']");
+  var $ano = doc.querySelector("[data-js='anoNC']");
+  var $placa = doc.querySelector("[data-js='placaNC']");
+  var $cor = doc.querySelector("[data-js='corNC']");
+  var $btnCadastrar = doc.querySelector("[data-js='btnCadastrar']");
+
+  var $tabelaListagemCarros = doc.querySelector("[data-js='listagemCarro']");
+
+  $btnCadastrar.addEventListener(
+    "click",
+    function (event) {
+      event.preventDefault();
+      var linha = doc.createElement("TR");
+      var imagem1 = doc.createElement("IMG");
+      var marcaModelo1 = doc.createElement("TH");
+      var ano1 = doc.createElement("TH");
+      var placa1 = doc.createElement("TH");
+      var cor1 = doc.createElement("TH");
+
+      var imagemInfo = doc.createTextNode($imagem.value);
+      var imageInfoTxt = imagemInfo.nodeValue;
+      var marcaModeloInfo = doc.createTextNode($marcaModelo.value);
+      var anoInfo = doc.createTextNode($ano.value);
+      var placaInfo = doc.createTextNode($placa.value);
+      var corInfo = doc.createTextNode($cor.value);
+
+      imagem1.setAttribute("src", imageInfoTxt);
+      marcaModelo1.appendChild(marcaModeloInfo);
+      ano1.appendChild(anoInfo);
+      placa1.appendChild(placaInfo);
+      cor1.appendChild(corInfo);
+
+      linha.appendChild(imagem1);
+      linha.appendChild(marcaModelo1);
+      linha.appendChild(ano1);
+      linha.appendChild(placa1);
+      linha.appendChild(cor1);
+
+      $tabelaListagemCarros.appendChild(linha);
+    },
+    false
+  );
+})(window, document);

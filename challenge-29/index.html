@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relâmpago Marquinhos</title>
+
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Bem-Vindo a Relâmpago Marquinhos</h1>
+  <form method="post">
+    <p>Cadastre um Novo Carro</p>
+    <ul>
+      <li>
+        <label>Foto da Nave</label>
+        <input type="url" data-js="imagemNC" placeholder="http://fotodaimagem...">
+      </li>
+      <li>
+        <label>Marca / Modelo</label>
+        <input type="text" data-js="marcaModeloNC" placeholder="Fiat / Uno">
+      </li>
+      <li>
+        <label>Ano</label>
+        <input type="text" data-js="anoNC" placeholder="1998">
+      </li>
+      <li>
+        <label>Placa</label>
+        <input type="text" data-js="placaNC" placeholder="EJC-5467">
+      </li>
+      <li>
+        <label>Cor</label>
+        <input type="text" data-js="corNC" placeholder="Ex: 'Amarelo'">
+      </li>
+    </ul>
+    <button type="submit" data-js="btnCadastrar">Cadastrar</button>
+  </form>
+  <p>Lista de Carros</p>
+  <table>
+    <tbody data-js="listagemCarro">
+      <tr>
+        <th>Imagem</th>
+        <th>Marca / Modelo</th>
+        <th>Ano</th>
+        <th>Placa</th>
+        <th>Cor</th>
+      </tr>
+    </tbody>
+  </table>
+
+  <script src="challenge-29.js"></script>
+</body>
+
+</html>
